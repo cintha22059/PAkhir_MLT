@@ -247,10 +247,10 @@ Pada EDA ini juga diidentifikasi missing value dimana ternyata ditemukan pada da
 nantinya akan di handling pada data preparation
 
 ### Univariate Analysis 
-![top10genre](https://github.com/cintha22059/PAkhir_MLT/blob/main/Top%2010%20Genre%20Anime.png)
-![distribusitipeanime](https://github.com/cintha22059/PAkhir_MLT/blob/main/Distribusi%20Tipe%20Anime.png)
-![studio](https://github.com/cintha22059/PAkhir_MLT/blob/main/Distribusi%20studio%20anime.png)
-![top10member](https://github.com/cintha22059/PAkhir_MLT/blob/main/top%2010%20anime%20berdasarkan%20member.png)
+![Top 10 Genre Anime](https://github.com/user-attachments/assets/d7b9cb71-f286-4f35-a27f-8874488dcd77)
+![Distribusi Tipe Anime](https://github.com/user-attachments/assets/603e94f8-be0a-4953-9552-9613e20a6b2d)
+![Distribusi studio anime](https://github.com/user-attachments/assets/e195273b-206e-4653-97d4-13906684129c)
+![top 10 anime berdasarkan member](https://github.com/user-attachments/assets/7bbbd454-afff-4790-bb61-2ce7b704a9d0)
 
 ### Top 10 Genre Anime
 - Grafik ini menunjukkan distribusi dari 10 genre anime paling populer. Dari grafik tersebut, genre **Action**, **Adventure**, dan **Comedy** terlihat mendominasi, menandakan minat yang tinggi terhadap cerita penuh aksi dan petualangan, serta hiburan yang menyenangkan.
@@ -272,8 +272,24 @@ nantinya akan di handling pada data preparation
 - Beberapa judul yang sering kali menjadi perbincangan seperti **Naruto**, **One Piece**, atau **Attack on Titan** kemungkinan besar muncul di daftar ini.
 - Jumlah anggota komunitas menunjukkan popularitas secara keseluruhan, dan mungkin dipengaruhi oleh distribusi global atau aksesibilitas dari platform streaming.
 
+### Multivariate Analysis
+
+![Cuplikan layar 2024-11-04 095102](https://github.com/user-attachments/assets/9c41e1ee-d72f-4c46-80ab-62d55150f207)
+
+Sebelum melanjutkan ke analisis multivariate saya mengubah beberapa tipe data ke tipedata numerik agar dapat dianalisis lebih dalam
 
 
+![distribusi score berdasarkan tipe anime](https://github.com/user-attachments/assets/d1808a34-4d36-48e4-babf-50bd83f454e4)
+![hubungan antara popularity dan member](https://github.com/user-attachments/assets/733a98e6-2347-413a-a186-171c5f3b5d8a)
+![hubungan anatara fav dan popular](https://github.com/user-attachments/assets/3c1885c5-cc14-4ccf-a1c3-0fdc558feb6a)
+![matriks kolerasi](https://github.com/user-attachments/assets/8f1b8231-6cc7-4064-bf54-cbf5998d01ba)
+
+1. Distribusi Skor Berdasarkan Tipe Anime Visualisasi ini menggunakan boxplot untuk menunjukkan distribusi skor pada setiap jenis (tipe) anime. Boxplot ini memvisualisasikan median, kuartil bawah dan atas, serta outliers (jika ada) dalam setiap tipe anime, yang memungkinkan kita untuk melihat variasi skor antar tipe. Dari boxplot, kita bisa membandingkan median skor antar tipe untuk melihat tipe anime mana yang cenderung memiliki skor lebih tinggi atau distribusi yang lebih luas.
+2. Hubungan antara Popularitas dan Jumlah Member Scatter plot ini menunjukkan hubungan antara popularitas dan jumlah anggota (member) untuk setiap anime. Di sumbu X ada metrik popularitas, dan di sumbu Y adalah jumlah anggota. Grafik ini membantu mengidentifikasi pola, misalnya apakah anime yang lebih populer cenderung memiliki lebih banyak anggota. Jika terlihat korelasi positif, maka semakin populer sebuah anime, semakin banyak anggota yang tertarik pada anime tersebut.
+3. Hubungan antara Favorit dan Popularitas Scatter plot ini menggambarkan hubungan antara jumlah favorit (favoritisme) dengan popularitas anime. Sumbu X menunjukkan popularitas, sedangkan sumbu Y menunjukkan jumlah favorit. Melalui grafik ini, kita bisa melihat apakah anime yang lebih populer cenderung menjadi favorit atau apakah terdapat beberapa anime dengan penggemar yang sangat setia meskipun popularitasnya tidak tinggi. Jika ada garis diagonal atau pola linear, itu menunjukkan korelasi antara favoritisme dan popularitas.
+4. Matriks Korelasi Matriks korelasi ini menampilkan hubungan antar variabel dalam dataset anime dalam bentuk heatmap. Nilai korelasi berkisar dari -1 (korelasi negatif sempurna) hingga 1 (korelasi positif sempurna). Warna lebih gelap atau cerah di masing-masing kotak menunjukkan kekuatan korelasi antar variabel. Variabel dengan korelasi tinggi memiliki nilai mendekati 1 atau -1, yang menunjukkan hubungan linier yang kuat. Misalnya, jika terdapat korelasi tinggi antara ‘member’ dan ‘popularity’, itu menunjukkan bahwa keduanya saling berkaitan erat.
+
+   
 ## Data Preparation
 
 Sebelum memasuki data preparation terlebih dahulu menghapus beberapa kolom yang tidak diperlukan dalam analisis.
@@ -400,8 +416,9 @@ Dimana:
 - $A_t$ : Nilai aktual
 - $F_t$ : Nilai hasil prediksi
 - n: Banyak data
+  
+![model metriks](https://github.com/user-attachments/assets/f4f7a4bf-5be6-4d13-922e-019627b6a2a5)
 
-![model_metriks](https://github.com/cintha22059/PAkhir_MLT/blob/main/model%20metriks.png)
 
 Hasil training cukup bagus dimana hasil akhir error pada train 0.7 dan pada test 0.25.
 
