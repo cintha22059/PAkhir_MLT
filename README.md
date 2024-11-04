@@ -247,8 +247,8 @@ Pada EDA ini juga diidentifikasi missing value dimana ternyata ditemukan pada da
 nantinya akan di handling pada data preparation
 
 ### Univariate Analysis 
-
-
+![top10genre](https://github.com/cintha22059/PAkhir_MLT/blob/main/Top%2010%20Genre%20Anime.png)
+![distribusitipeanime](https://github.com/cintha22059/PAkhir_MLT/blob/main/Distribusi%20Tipe%20Anime.png)
 ## Data Preparation
 Penanganan Tipe Data
 - **Mengkonversi kolom harga**: Mengubah kolom harga dari string ke float dengan menghapus simbol mata uang (₹) dan tanda koma.
