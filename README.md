@@ -275,24 +275,18 @@ nantinya akan di handling pada data preparation
 
 
 ## Data Preparation
-Penanganan Tipe Data
-- **Mengkonversi kolom harga**: Mengubah kolom harga dari string ke float dengan menghapus simbol mata uang (₹) dan tanda koma.
-- **Mengubah kolom discount_percentage**: Mengubah dari string ke float dengan menghapus simbol '%'.
-- **Konversi rating dan rating_count**: Mengubah tipe data kolom rating dan rating_count ke format numerik.
 
-Penanganan Missing Value
-- **Mengisi missing value pada kolom rating**: Mengisi dengan nilai median karena rating menggunakan skala 1-5.
-- **Mengisi missing value pada kolom rating_count**: Mengisi dengan median karena distribusinya skewed.
-- **Alasan**: Penggunaan median lebih tepat daripada mean untuk data yang tidak terdistribusi normal.
+Sebelum memasuki data preparation terlebih dahulu menghapus beberapa kolom yang tidak diperlukan dalam analisis.
 
-Feature Engineering
-- **Fitur baru 'price_ratio'**: Membuat fitur 'price_ratio' yang dihitung dengan rumus `price_ratio = actual_price / discounted_price`.
-- **Fitur 'review_length'**: Menambahkan fitur yang dihitung dari panjang kolom review_content.
-- **Alasan**: Fitur ini dibuat untuk menangkap hubungan antara harga dan memberikan insight lebih detail tentang ulasan.
+**TF-IDF**
+Tahap ini adalah mengubah data kedalam representasi numerik untuk modeling Cosine Similarity agar mengukur kemiripan antar Item 
 
-Standardisasi
-- **Menggunakan StandardScaler**: Menormalkan fitur numerik agar skala antar fitur seragam.
-- **Alasan**: Standardisasi ini penting agar tidak ada fitur yang mendominasi dalam proses clustering.
+**Encoding Data user_id dan anime_id**
+Encoding ini diperlukan untuk model collaborative filtering. encoding dilakukan agar model neural network dapat memproses.
+
+**Splitting Data**
+Splitiing data dilakukan untuk model collaborative filtering digunakan untuk mengevaluasi  model.
+
 
 ## Modeling
 **Pemodelan Clustering**
