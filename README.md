@@ -368,58 +368,47 @@ Model rekomendasi berbasis jaringan saraf ini berfungsi dengan mendefinisikan ke
 
 
 ## Evaluation
-Metrik Evaluasi untuk Model Clustering
-![alt text](https://github.com/cintha22059/PA_MLT/blob/main/plot%20silhouette%20score.png)
+Metrik Evaluasi untuk Model 1
 
-Silhouette Score
-- **Deskripsi**: Mengukur seberapa mirip objek dengan cluster-nya sendiri dibandingkan dengan cluster lain.
-- **Range nilai**: -1 hingga 1.
-- **Interpretasi**: Skor yang lebih tinggi menunjukkan cluster yang lebih baik.
-- **Hasil**:
-Komparasi Silhouette Score 
-- Model 1 KMeans Selected features: 0.6349327834910277
-- Model 2 KMeans Selected features dan Add new Features: 0.8997343627882889
-- Model 3 DBSCAN selected features: 0.3554689722570361
+Metrik *Precision* digunakan untuk mengevaluasi seberapa baik performa model, terutama dalam pengelompokan. *Precision* mengukur proporsi antara nilai sebenarnya (ground truth) dengan prediksi yang positif. Rumusnya adalah:
 
-Sehingga diputuskan model kluster terbaik adalah model 2 Kmeans dengan nilai Silhouette Score 0.89 dimana menerapkan features selection dan penambahan features.
+$$ Precision = \frac{TP}{TP + FP} $$
 
-Berikut merupakan hasil analisis Cluster dari model terbaik :
+Di mana:
 
-**Cluster 0:**
+- TP (*True Positive*) adalah jumlah kejadian positif yang diprediksi dengan benar oleh model.
+- FP (*False Positive*) adalah jumlah kejadian positif yang salah diprediksi oleh model.
 
-Review Length: Memiliki banyak outlier dengan review yang sangat panjang (hingga 17500 karakter), namun median sekitar 1000-1500 karakter
-
-Price Ratio: Memiliki outlier hingga 16x lipat, dengan median sekitar 2x
-
-Discount Percentage: Median diskon sekitar 50% dengan rentang 30-65%
-
-Rating Count: Jumlah rating relatif rendah (median <50000)
-
-Rating: Median rating sekitar 4.1 dengan beberapa outlier rendah hingga 2.0
-
-Analisis:
-Cluster 0 merepresentasikan produk dengan engagement pengguna yang lebih rendah namun memiliki review yang lebih detail. Produk-produk ini cenderung memiliki variasi harga yang ekstrem dan diskon yang moderat. Meski jumlah rating rendah, rating keseluruhan cukup baik dengan beberapa kasus ketidakpuasan.
+Metrik ini membantu menunjukkan akurasi prediksi positif yang dihasilkan model.
 
 
+Precision dihitung dengan rumus:
 
-**Cluster 1:**
+$$
+Precision = \frac{9}{9 + 1} = \frac{9}{10} = 0.9
+$$
 
-Review Length: Lebih konsisten dengan sedikit outlier, median sekitar 1000-1500 karakter
+Berdasarkan hasil yang dihasilkan oleh model Cosine Similarity sebelumnya, tingkat presisi yang dihitung adalah 9/10 untuk rekomendasi Top-10. Ini menunjukkan bahwa sistem mampu memberikan rekomendasi yang sangat sesuai dengan genre anime yang diinginkan, meskipun ada sedikit perbedaan dari rekomendasi yang ideal
 
-Price Ratio: Lebih stabil dengan median sekitar 2x dan sedikit outlier
+**Evaluasi Model 2**
+RMSE (Root Mean Squared Error) adalah metrik evaluasi yang digunakan untuk mengukur seberapa baik model prediksi dalam memperkirakan nilai aktual. Metrik ini menghitung akar kuadrat dari rata-rata kesalahan kuadrat antara nilai yang diprediksi oleh model dan nilai yang sebenarnya. RMSE memberikan ukuran kesalahan dalam satuan yang sama dengan variabel yang diprediksi, sehingga mudah dipahami.
 
-Discount Percentage: Distribusi diskon mirip dengan Cluster 0
+$$ RMSE =  \sqrt{\frac{\sum_{t=1}^{n}(A_t - F_t)^2}{n}} $$
 
-Rating Count: Jumlah rating sangat tinggi (median >150000)
+Dimana:
 
-Rating: Rating lebih konsisten dengan median sekitar 4.2
-Analisis:
+- $A_t$ : Nilai aktual
+- $F_t$ : Nilai hasil prediksi
+- n: Banyak data
 
-Cluster 1 merepresentasikan produk populer dengan engagement tinggi. Review cenderung lebih singkat namun konsisten. Harga dan diskon lebih stabil dibanding Cluster 0. Produk-produk ini memiliki basis pengguna yang besar dengan rating yang konsisten tinggi, menunjukkan kualitas dan kepuasan pelanggan yang lebih terjamin.
+![model_metriks](https://github.com/cintha22059/PAkhir_MLT/blob/main/model%20metriks.png)
+
+Hasil training cukup bagus dimana hasil akhir error pada train 0.7 dan pada test 0.25.
+
 
 **Evaluasi terhadap Business Understanding**
-Hasil analisis cluster berhasil menjawab problem statement dengan memberikan wawasan mendalam mengenai perilaku konsumen dan faktor-faktor yang mempengaruhi performa produk. Cluster 0 dan Cluster 1 menunjukkan pola perilaku yang berbeda dalam hal panjang ulasan, rasio harga, diskon, jumlah rating, dan rating yang diberikan, yang mencerminkan preferensi konsumen terhadap berbagai jenis produk.
+Hasil modeling sistem rekomendasi berhasil menjawab problem statement dengan menyediakan solusi yang efektif untuk membantu pengguna menemukan judul anime yang sesuai dengan preferensi mereka. Dengan mengimplementasikan pendekatan content-based filtering dan collaborative filtering, sistem mampu menghasilkan rekomendasi anime yang relevan berdasarkan kesamaan genre dan preferensi pengguna yang terukur melalui rating. Hal ini memberikan wawasan yang mendalam mengenai interaksi pengguna dengan berbagai judul anime dan faktor-faktor yang mempengaruhi ketertarikan mereka.
 
-Model berhasil mencapai goals yang diharapkan. Analisis yang dilakukan pada masing-masing cluster memberikan pemahaman yang lebih baik tentang bagaimana konsumen berinteraksi dengan produk berdasarkan rating dan ulasan mereka. Selain itu, identifikasi cluster yang menunjukkan produk dengan engagement rendah dan tinggi dapat membantu dalam pengambilan keputusan strategis.
+Model ini berhasil mencapai goals yang diharapkan, yaitu meningkatkan kepuasan pengguna dengan merekomendasikan anime yang belum pernah ditonton dan sesuai dengan minat mereka. Dengan menggunakan cosine similarity untuk content-based filtering dan analisis preferensi pengguna melalui collaborative filtering, sistem dapat memberikan rekomendasi yang lebih personal dan relevan. Metrik precision yang digunakan untuk mengukur kinerja sistem memberikan jaminan bahwa rekomendasi yang dihasilkan memiliki kualitas yang tinggi, sehingga pengguna lebih mungkin untuk menikmati saran yang diberikan.
 
-Solusi yang direncanakan berdampak signifikan. Dengan memisahkan produk ke dalam cluster berdasarkan karakteristik yang telah dianalisis, perusahaan dapat mengadopsi pendekatan yang lebih terarah dalam pemasaran dan penetapan harga. Misalnya, untuk Cluster 0, perusahaan dapat mempertimbangkan untuk meningkatkan interaksi dengan konsumen untuk produk dengan review panjang namun engagement rendah, sedangkan untuk Cluster 1, perusahaan dapat memanfaatkan popularitas dan kualitas produk untuk strategi promosi yang lebih agresif.
+Solusi yang direncanakan membawa dampak signifikan terhadap strategi pemasaran dan pengembangan produk. Dengan memberikan rekomendasi yang lebih tepat dan terarah, perusahaan dapat meningkatkan engagement pengguna di platform mereka. Misalnya, dengan memahami anime mana yang paling mungkin disukai oleh pengguna, perusahaan dapat menyesuaikan konten yang ditawarkan dan mengoptimalkan kampanye pemasaran. Ini tidak hanya meningkatkan pengalaman pengguna tetapi juga berpotensi meningkatkan loyalitas pelanggan dan konversi, menciptakan keuntungan kompetitif dalam industri anime.
