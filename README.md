@@ -249,6 +249,31 @@ nantinya akan di handling pada data preparation
 ### Univariate Analysis 
 ![top10genre](https://github.com/cintha22059/PAkhir_MLT/blob/main/Top%2010%20Genre%20Anime.png)
 ![distribusitipeanime](https://github.com/cintha22059/PAkhir_MLT/blob/main/Distribusi%20Tipe%20Anime.png)
+![studio](https://github.com/cintha22059/PAkhir_MLT/blob/main/Distribusi%20studio%20anime.png)
+![top10member](https://github.com/cintha22059/PAkhir_MLT/blob/main/top%2010%20anime%20berdasarkan%20member.png)
+
+### Top 10 Genre Anime
+- Grafik ini menunjukkan distribusi dari 10 genre anime paling populer. Dari grafik tersebut, genre **Action**, **Adventure**, dan **Comedy** terlihat mendominasi, menandakan minat yang tinggi terhadap cerita penuh aksi dan petualangan, serta hiburan yang menyenangkan.
+- Genre seperti **Fantasy** dan **Supernatural** juga memiliki popularitas tinggi, menunjukkan minat penonton pada cerita dengan elemen magis atau dunia yang tidak realistis.
+- Genre **Slice of Life** berada di posisi yang cukup tinggi, mengindikasikan ketertarikan penonton pada cerita-cerita yang menggambarkan kehidupan sehari-hari secara realistis.
+
+### Distribusi Tipe Anime
+- Tipe anime **TV** memiliki proporsi yang paling besar dibandingkan dengan tipe lainnya, seperti **OVA** dan **Movie**. Hal ini wajar karena serial TV adalah format yang paling umum untuk anime, memungkinkan pengembangan cerita yang panjang.
+- Tipe **Movie** dan **OVA** (Original Video Animation) juga memiliki proporsi yang signifikan. Movies sering kali menarik karena kualitas animasi yang lebih tinggi dan cerita yang padat, sedangkan OVA memberikan konten tambahan bagi penggemar.
+- Tipe lain seperti **ONA** (Original Net Animation) dan **Special** memiliki proporsi yang lebih kecil, menunjukkan bahwa mereka kurang populer dibandingkan format utama.
+
+### Distribusi Studio Anime
+- Grafik ini menunjukkan distribusi anime yang diproduksi oleh berbagai studio. Beberapa studio mendominasi dalam jumlah produksi anime, kemungkinan besar karena kapasitas dan sumber daya mereka yang lebih besar.
+- Studio besar seperti **Toei Animation**, **Sunrise**, dan **Madhouse** mungkin terlihat sering muncul, mengindikasikan peran mereka dalam menciptakan berbagai judul anime terkenal.
+- Jumlah anime yang diproduksi oleh studio besar ini menunjukkan reputasi dan pengalaman mereka dalam menghasilkan anime yang disukai oleh penonton.
+
+### Top 10 Anime Berdasarkan Member
+- Grafik ini menampilkan 10 anime dengan jumlah anggota komunitas tertinggi. Anime dengan jumlah anggota terbanyak mungkin merupakan anime yang sangat populer, banyak dibicarakan, atau termasuk dalam kategori anime "wajib tonton" di komunitas anime.
+- Beberapa judul yang sering kali menjadi perbincangan seperti **Naruto**, **One Piece**, atau **Attack on Titan** kemungkinan besar muncul di daftar ini.
+- Jumlah anggota komunitas menunjukkan popularitas secara keseluruhan, dan mungkin dipengaruhi oleh distribusi global atau aksesibilitas dari platform streaming.
+
+
+
 ## Data Preparation
 Penanganan Tipe Data
 - **Mengkonversi kolom harga**: Mengubah kolom harga dari string ke float dengan menghapus simbol mata uang (₹) dan tanda koma.
