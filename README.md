@@ -289,72 +289,82 @@ Splitiing data dilakukan untuk model collaborative filtering digunakan untuk men
 
 
 ## Modeling
-**Pemodelan Clustering**
+### Model 1 Consine Similarity
+Model 1 menggunakan cosine similarity untuk memberikan rekomendasi anime dengan menghitung kemiripan antara anime berdasarkan fitur teks, seperti genre. Pertama, model menghitung nilai cosine similarity dan menyimpannya dalam DataFrame untuk akses mudah. Selanjutnya, model mengambil sampel dari DataFrame dan mencari data spesifik untuk anime yang dijadikan acuan. Fungsi yang didefinisikan menerima parameter seperti nama anime, DataFrame similarity, dan jumlah rekomendasi yang diinginkan. Fungsi ini kemudian mencari indeks anime terdekat, menghapus anime acuan dari daftar, dan mengembalikan rekomendasi anime yang relevan. Meskipun sederhana dan efektif untuk data teks, model ini memiliki keterbatasan, seperti sensitivitas terhadap data yang tidak seimbang dan kurangnya konteks dalam rekomendasi.
 
-Dalam pemodelan ini, terdapat tiga model yang digunakan, yaitu **KMeans dengan fitur terpilih**, **KMeans dengan fitur terpilih dan fitur tambahan**, dan **DBSCAN dengan fitur terpilih**. Berikut adalah penjelasan tahapan dan parameter yang digunakan dalam masing-masing model:
+1. **Menghitung Cosine Similarity**: 
+   Pertama, kita menghitung cosine similarity antara item-item (dalam hal ini, anime) berdasarkan representasi TF-IDF mereka. Cosine similarity digunakan untuk menentukan seberapa mirip dua vektor (vektor TF-IDF) satu sama lain, yang dihitung berdasarkan sudut antara kedua vektor tersebut.
 
-Model 1: KMeans dengan Fitur Terpilih
+2. **Membuat DataFrame untuk Similarity**: 
+   Setelah menghitung cosine similarity, kita mengonversi matriks similarity tersebut menjadi DataFrame. Dengan menggunakan nama anime sebagai indeks dan kolom, kita dapat dengan mudah merujuk ke similarity antara anime yang berbeda.
 
-**Standarisasi Data:**
-- **Parameter**: `StandardScaler()`
-- Data numerik (`rating`, `rating_count`, `discount_percentage`) dinormalisasi untuk memastikan bahwa semua fitur berada dalam skala yang sama, menghindari bias pada fitur dengan rentang yang lebih besar.
+3. **Mengambil Sampel DataFrame**: 
+   Kita mengambil sampel acak dari DataFrame similarity untuk melihat beberapa nilai yang dihasilkan dan memverifikasi bahwa data terstruktur dengan benar.
 
-**K-Means Clustering:**
-- **Parameter**: `n_clusters` dalam rentang 2 hingga 10 (uji berbagai jumlah kluster).
-- Model KMeans dilatih menggunakan data yang telah distandarisasi, dan metrik evaluasi seperti inertia dan silhouette score dihitung untuk setiap jumlah kluster yang diuji.
+4. **Mencari Data Spesifik**: 
+   Mengambil informasi tentang anime tertentu, misalnya 'Cowboy Bebop', untuk memverifikasi bahwa data ada dan dapat digunakan untuk rekomendasi.
 
-Model 2: KMeans dengan Fitur Terpilih dan Fitur Tambahan
+5. **Fungsi Rekomendasi Anime**: 
+   Fungsi ini dirancang untuk mengambil nama anime sebagai input dan memberikan rekomendasi anime lainnya berdasarkan similarity. Parameter yang digunakan mencakup nama anime sebagai acuan, DataFrame similarity, DataFrame informasi anime, dan jumlah rekomendasi yang ingin ditampilkan.
 
-**Penambahan Fitur:**
-- Fitur baru (`price_ratio` dan `review_length`) ditambahkan ke dataset untuk meningkatkan informasi yang tersedia bagi model.
-  - `price_ratio`: Rasio antara harga aktual dan harga diskon.
-  - `review_length`: Panjang konten ulasan.
+6. **Mencari Indeks Anime Terdekat**: 
+   Di sini, kita mencari indeks anime yang memiliki similarity tertinggi dengan anime yang diberikan. Kita menggunakan teknik efisien untuk menemukan indeks tanpa mengurutkan seluruh array.
 
-**Standarisasi Data:**
-- Proses standarisasi dilakukan lagi untuk fitur baru dan yang sudah ada.
+7. **Menghapus Nama Anime dari Rekomendasi**: 
+   Nama anime yang diberikan dihapus dari daftar rekomendasi agar tidak muncul di hasil akhir.
 
-**K-Means Clustering:**
-- Sama seperti model sebelumnya, KMeans digunakan dengan rentang `n_clusters` yang sama untuk menemukan kluster yang optimal dan mengevaluasi dengan metrik yang relevan.
+8. **Mengembalikan DataFrame Rekomendasi**: 
+   Terakhir, kita membuat DataFrame baru yang berisi nama dan genre anime yang direkomendasikan, kemudian mengembalikan hasilnya.
 
-Model 3: DBSCAN dengan Fitur Terpilih
+**Kelebihan Model**
+- **Sederhana dan Mudah Dipahami**: Model berbasis cosine similarity mudah diimplementasikan dan dimengerti, terutama bagi yang sudah familiar dengan konsep vektor.
+- **Efektif untuk Data Teks**: Cocok untuk aplikasi di mana data terdiri dari teks, seperti genre anime, karena dapat menangkap kemiripan berdasarkan konten.
+- **Rekomendasi yang Personalisasi**: Menggunakan informasi spesifik dari anime yang disukai pengguna untuk memberikan rekomendasi yang relevan.
 
-**Penskalaan Data:**
-- Data distandarisasi menggunakan `StandardScaler()`.
+**Kekurangan Model**
+- **Sensitivitas terhadap Data yang Tidak Seimbang**: Jika beberapa genre lebih umum daripada yang lain, model mungkin memberikan rekomendasi yang kurang bervariasi.
+- **Kurangnya Konteks**: Model hanya mempertimbangkan genre dan tidak memperhitungkan aspek lain seperti rating, popularitas, atau preferensi pengguna.
+- **Skalabilitas**: Seiring bertambahnya jumlah anime, perhitungan cosine similarity dapat menjadi tidak efisien dalam hal waktu dan memori.
+- **Rekomendasi yang Terbatas**: Model hanya memberikan rekomendasi berdasarkan kemiripan konten, sehingga mungkin tidak memperkenalkan pengguna pada item yang berbeda dari yang sudah mereka lihat.
 
-**DBSCAN Clustering:**
-- **Parameter**: `eps=0.5`, `min_samples=5`
-- DBSCAN digunakan untuk mendeteksi kluster berdasarkan densitas data, dan model menghitung label kluster. Hasil evaluasi termasuk jumlah kluster yang terbentuk dan jumlah noise.
+### Model 2 RecommenderNet
+Model rekomendasi berbasis jaringan saraf ini berfungsi dengan mendefinisikan kelas yang mewarisi dari tf.keras.Model, di mana layer embedding digunakan untuk mengurangi dimensi data pengguna dan anime. Dalam proses forward pass, model menghitung dot product antara vektor pengguna dan anime, ditambah bias, untuk menghasilkan prediksi rating. Model dikompilasi dengan fungsi kerugian Binary Crossentropy dan dilatih menggunakan data latih. Setelah pelatihan, model memberikan rekomendasi anime untuk pengguna dengan memprediksi rating untuk anime yang belum ditonton, menampilkan anime dengan rating tertinggi sebagai rekomendasi. Meskipun efektif dalam menangkap pola kompleks, model ini memerlukan data besar dan bisa sulit dipahami hasilnya.
 
-Kelebihan dan Kekurangan dari Setiap Algoritma
+1. **Definisi Model**: 
+   Model rekomendasi didefinisikan sebagai kelas yang mewarisi dari `tf.keras.Model`, memungkinkan penyesuaian dan penggunaan fungsi-fungsi yang ada dalam framework Keras.
 
-**KMeans**
-Dalam konteks data yang berisi fitur numerik seperti `rating`, `rating_count`, `discount_percentage`, `price_ratio`, dan `review_length`, KMeans berfungsi dengan baik jika data tersebut tidak memiliki outlier signifikan dan jika kluster berbentuk bulat. Karena data yang digunakan mencakup fitur yang terkait langsung dengan produk dan penilaian, algoritma ini memberikan hasil yang relevan. Namun, jika terdapat banyak variasi dalam data (misalnya, produk dengan diskon ekstrem atau rating yang tidak biasa), hasil klustering mungkin tidak mencerminkan struktur data dengan akurat.
+2. **Inisialisasi Model**: 
+   Pada tahap ini, parameter-parameter penting seperti jumlah pengguna, jumlah anime, dan ukuran embedding diatur. Layer embedding untuk pengguna dan anime diciptakan, termasuk bias untuk masing-masing.
 
-**DBSCAN**
-Jika dataset memiliki produk dengan pola rating yang sangat bervariasi atau diskon yang tidak teratur, DBSCAN akan lebih efektif karena kemampuannya dalam mendeteksi kluster dengan bentuk tidak beraturan dan mengidentifikasi outlier. DBSCAN akan sangat berguna untuk dataset yang mengandung noise, misalnya produk dengan rating yang ekstrem, dan memberikan keunggulan dalam menemukan struktur kluster yang lebih halus dalam data.
+3. **Layer Embedding**: 
+   Layer embedding digunakan untuk mereduksi dimensi representasi pengguna dan anime. Ini memungkinkan model untuk belajar representasi yang lebih kompak dan relevan dari data yang lebih besar.
 
-**Pemilihan Model Terbaik**
+4. **Forward Pass**: 
+   Dalam metode ini, model memproses input untuk menghasilkan prediksi. Vektor untuk pengguna dan anime diambil dari embedding, dan kemudian dot product antara vektor pengguna dan anime dihitung, diikuti dengan penambahan bias.
 
-Berdasarkan hasil evaluasi:
-- **Model 1 KMeans (Fitur Terpilih)**: Silhouette Score: 0.6349
-- **Model 2 KMeans (Fitur Terpilih + Fitur Tambahan)**: Silhouette Score: 0.8997
-- **Model 3 DBSCAN**: Silhouette Score: 0.3555
+5. **Kompilasi Model**: 
+   Model disiapkan untuk pelatihan dengan menentukan fungsi kerugian, optimizer, dan metrik evaluasi. Fungsi kerugian yang digunakan adalah Binary Crossentropy, yang sesuai untuk masalah klasifikasi biner.
 
-**Model 2** dipilih sebagai model terbaik karena memiliki silhouette score tertinggi (0.8997), yang menunjukkan bahwa kluster yang dihasilkan lebih terpisah dengan baik dibandingkan dengan model lainnya. Hal ini mengindikasikan bahwa fitur tambahan meningkatkan pemisahan antar kluster.
+6. **Pelatihan Model**: 
+   Model dilatih menggunakan data latih yang disediakan. Parameter seperti ukuran batch dan jumlah epoch ditentukan untuk proses pelatihan. Data validasi juga digunakan untuk memantau kinerja model selama pelatihan.
 
-**Cara Kerja dan Parameter dari Setiap Model**
+7. **Mendapatkan Rekomendasi untuk Pengguna**: 
+   Setelah model dilatih, langkah selanjutnya adalah mendapatkan rekomendasi untuk pengguna tertentu. Ini melibatkan pengambilan ID pengguna, anime yang sudah ditonton, dan anime yang belum ditonton untuk memprediksi rating yang mungkin diberikan oleh pengguna terhadap anime yang belum mereka tonton.
 
-**KMeans**
-Menggunakan centroid untuk mengelompokkan data. Setiap iterasi, pusat kluster diperbarui hingga konvergensi. Parameter `n_clusters` menentukan jumlah kluster, sedangkan `random_state` digunakan untuk memastikan hasil yang konsisten.
+8. **Memprediksi dan Menampilkan Rekomendasi**: 
+   Rating diprediksi untuk anime yang belum ditonton berdasarkan model, dan kemudian anime dengan rating tertinggi ditampilkan sebagai rekomendasi untuk pengguna. Detail anime yang telah ditonton pengguna juga disediakan untuk konteks.
 
-**DBSCAN**
-Mengelompokkan titik data berdasarkan densitas. `eps` menentukan jarak maksimum antara dua titik untuk menganggap mereka dalam kluster yang sama, sedangkan `min_samples` menentukan jumlah titik minimum dalam `eps` untuk membentuk kluster.
+**Kelebihan Model**
+- **Kemampuan Menangkap Pola Kompleks**: Model ini dapat mengenali dan mempelajari pola-pola kompleks dalam data, yang dapat meningkatkan akurasi rekomendasi.
+- **Representasi yang Efisien**: Layer embedding memberikan representasi yang lebih ringkas untuk pengguna dan item, yang membantu dalam proses pembelajaran.
+- **Fleksibilitas dalam Skala**: Dapat dengan mudah diskalakan untuk menangani jumlah pengguna dan item yang besar, asalkan data pelatihan yang memadai tersedia.
 
-**Proses Pencarian K Optimal**
+**Kekurangan Model**
+- **Kebutuhan Data yang Besar**: Memerlukan dataset yang cukup besar agar model dapat belajar secara efektif. Kurangnya data dapat menyebabkan model tidak optimal.
+- **Risiko Overfitting**: Meski ada regularisasi, model masih dapat mengalami overfitting, terutama pada dataset yang lebih kecil atau tidak seimbang.
+- **Kompleksitas dan Waktu Pelatihan**: Model ini lebih kompleks dan memakan waktu untuk dilatih dibandingkan metode rekomendasi yang lebih sederhana.
+- **Interpretabilitas yang Rendah**: Model berbasis deep learning sering dianggap sebagai "black box," sehingga sulit untuk memahami alasan di balik rekomendasi yang diberikan.
 
-Untuk menemukan jumlah kluster optimal `k` dalam model KMeans, metode yang digunakan adalah dengan menghitung dan membandingkan nilai inertia dan silhouette score untuk setiap `k` dalam rentang yang telah ditentukan (2-10). Metrik ini digunakan untuk menentukan trade-off antara kompakness (inertia) dan pemisahan (silhouette score) dari kluster yang terbentuk, dengan tujuan untuk memilih nilai `k` yang memberikan hasil terbaik.
-
-Secara umum, silhouette score yang lebih tinggi menunjukkan kluster yang lebih baik, sedangkan inertia yang lebih rendah menunjukkan kluster yang lebih kompak. Mencari `k` optimal adalah bagian penting dari proses modeling, dan dapat melibatkan metode lain seperti elbow method atau silhouette analysis.
 
 
 ## Evaluation
