@@ -343,6 +343,12 @@ Model 1 menggunakan cosine similarity untuk memberikan rekomendasi anime dengan 
 - **Skalabilitas**: Seiring bertambahnya jumlah anime, perhitungan cosine similarity dapat menjadi tidak efisien dalam hal waktu dan memori.
 - **Rekomendasi yang Terbatas**: Model hanya memberikan rekomendasi berdasarkan kemiripan konten, sehingga mungkin tidak memperkenalkan pengguna pada item yang berbeda dari yang sudah mereka lihat.
 
+**Hasil Modeling**
+
+![Cuplikan layar 2024-11-04 154434](https://github.com/user-attachments/assets/18c8198e-99db-4bdc-a1f6-761da997e75a)
+
+Diatas merupakan hasil dari modeling Consine Similarity dimana model diminta untuk memberikan rekomendasi anime yang mirip dengan 'Cowboy Bebop' dan model memberikan output Top-N dimana anime yang direkomendasikan memiliki genre yang mirip dengan 'Cowboy Bebop'
+
 ### Model 2 RecommenderNet
 Model rekomendasi berbasis jaringan saraf ini berfungsi dengan mendefinisikan kelas yang mewarisi dari tf.keras.Model, di mana layer embedding digunakan untuk mengurangi dimensi data pengguna dan anime. Dalam proses forward pass, model menghitung dot product antara vektor pengguna dan anime, ditambah bias, untuk menghasilkan prediksi rating. Model dikompilasi dengan fungsi kerugian Binary Crossentropy dan dilatih menggunakan data latih. Setelah pelatihan, model memberikan rekomendasi anime untuk pengguna dengan memprediksi rating untuk anime yang belum ditonton, menampilkan anime dengan rating tertinggi sebagai rekomendasi. Meskipun efektif dalam menangkap pola kompleks, model ini memerlukan data besar dan bisa sulit dipahami hasilnya.
 
@@ -381,7 +387,11 @@ Model rekomendasi berbasis jaringan saraf ini berfungsi dengan mendefinisikan ke
 - **Kompleksitas dan Waktu Pelatihan**: Model ini lebih kompleks dan memakan waktu untuk dilatih dibandingkan metode rekomendasi yang lebih sederhana.
 - **Interpretabilitas yang Rendah**: Model berbasis deep learning sering dianggap sebagai "black box," sehingga sulit untuk memahami alasan di balik rekomendasi yang diberikan.
 
+**Hasil Modeling**
 
+![Cuplikan layar 2024-11-04 154502](https://github.com/user-attachments/assets/afa8b140-217c-4f53-a3cb-3bb539ec5896)
+
+Dari output diatas model mengambil sampel user secara acak kemudian memberikan 10 rekomendasi berdasarkan analisis rating anime yang telah ditonton dan anime-anime yang sudah serta belum ditonton
 
 ## Evaluation
 Metrik Evaluasi untuk Model 1
