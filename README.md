@@ -443,4 +443,4 @@ Solusi yang direncanakan membawa dampak signifikan terhadap strategi pemasaran d
 
 ## Daftar Refrensi 
 
-Muhammad Auzhae., Firmansyah Aji., & M.Syamsudin. (2023).*Rekomendasi Anime Berdasarkan Prefensi Pengguna: Studi Kasus Menggunakan Decision Tree dengan Atribut Genre, Jumlah Episode dan Rating*.
+Muhammad Auzhae., Firmansyah Aji., & M.Syamsudin. (2023).*Rekomendasi Anime Berdasarkan Prefensi Pengguna: Studi Kasus Menggunakan Decision Tree dengan Atribut Genre, Jumlah Episode dan Rating*. diakses pada 04 November 2024 [(https://publishing-widyagama.ac.id/ejournal-v2/bcti/article/view/4885)](https://publishing-widyagama.ac.id/ejournal-v2/bcti/article/view/4885)
