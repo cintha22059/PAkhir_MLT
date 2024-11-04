@@ -439,3 +439,8 @@ Hasil modeling sistem rekomendasi berhasil menjawab problem statement dengan men
 Model ini berhasil mencapai goals yang diharapkan, yaitu meningkatkan kepuasan pengguna dengan merekomendasikan anime yang belum pernah ditonton dan sesuai dengan minat mereka. Dengan menggunakan cosine similarity untuk content-based filtering dan analisis preferensi pengguna melalui collaborative filtering, sistem dapat memberikan rekomendasi yang lebih personal dan relevan. Metrik precision yang digunakan untuk mengukur kinerja sistem memberikan jaminan bahwa rekomendasi yang dihasilkan memiliki kualitas yang tinggi, sehingga pengguna lebih mungkin untuk menikmati saran yang diberikan.
 
 Solusi yang direncanakan membawa dampak signifikan terhadap strategi pemasaran dan pengembangan produk. Dengan memberikan rekomendasi yang lebih tepat dan terarah, perusahaan dapat meningkatkan engagement pengguna di platform mereka. Misalnya, dengan memahami anime mana yang paling mungkin disukai oleh pengguna, perusahaan dapat menyesuaikan konten yang ditawarkan dan mengoptimalkan kampanye pemasaran. Ini tidak hanya meningkatkan pengalaman pengguna tetapi juga berpotensi meningkatkan loyalitas pelanggan dan konversi, menciptakan keuntungan kompetitif dalam industri anime.
+
+
+## Daftar Refrensi 
+
+Muhammad Auzhae., Firmansyah Aji., & M.Syamsudin. (2023).*Rekomendasi Anime Berdasarkan Prefensi Pengguna: Studi Kasus Menggunakan Decision Tree dengan Atribut Genre, Jumlah Episode dan Rating*.
